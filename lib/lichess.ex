@@ -1,4 +1,4 @@
-defmodule LichessProgress do
+defmodule Lichess do
   defmodule Games do
     @map %{
       antichess: "Antichess",
@@ -41,9 +41,9 @@ defmodule LichessProgress do
     end
   end
 
-  alias LichessProgress.{Client, Games}
+  alias Lichess.{Client, Games}
 
-  def run(username, game) do
+  def chart_rating(username, game) do
     with {:ok, game} <- Games.parse(game),
          {:ok, ratings} <- Client.get_ratings(username, game),
          {:ok, chart} <- Asciichart.plot(ratings, height: 15) do

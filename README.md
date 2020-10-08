@@ -1,4 +1,4 @@
-# LichessProgress
+# Lichess
 
 **TODO: Add description**
 

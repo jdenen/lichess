@@ -1,4 +1,4 @@
-defmodule LichessProgress.MixProject do
+defmodule Lichess.MixProject do
   use Mix.Project
 
   def project do

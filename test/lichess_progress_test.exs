@@ -1,8 +1,8 @@
-defmodule LichessProgressTest do
+defmodule LichessTest do
   use ExUnit.Case
-  doctest LichessProgress
+  doctest Lichess
 
   test "greets the world" do
-    assert LichessProgress.hello() == :world
+    assert Lichess.hello() == :world
   end
 end

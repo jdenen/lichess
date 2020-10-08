@@ -1,4 +1,4 @@
-defmodule LichessProgress.Client do
+defmodule Lichess.Client do
   use Tesla
 
   @token System.fetch_env!("LICHESS_API_TOKEN")
