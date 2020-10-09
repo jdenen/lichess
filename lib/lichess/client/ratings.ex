@@ -1,4 +1,4 @@
-defmodule Lichess.Client do
+defmodule Lichess.Client.Ratings do
   use Tesla
 
   @token System.fetch_env!("LICHESS_API_TOKEN")
@@ -7,7 +7,7 @@ defmodule Lichess.Client do
   plug(Tesla.Middleware.Headers, [{"Authorization", "Bearer #{@token}"}])
   plug(Tesla.Middleware.JSON)
 
-  def get_ratings(username, game) do
+  def history(username, game) do
     with {:ok, resp} <- get("/user/#{username}/rating-history"),
          [game_resp] <- Enum.filter(resp.body, fn %{"name" => name} -> name == game end),
          [_1, _2 | _rest] = ratings <- get_points(game_resp) do

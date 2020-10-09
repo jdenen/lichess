@@ -41,7 +41,7 @@ defmodule Lichess do
 
   def chart_rating(username, game) do
     with {:ok, game} <- Games.validate(game),
-         {:ok, ratings} <- Client.get_ratings(username, game),
+         {:ok, ratings} <- Client.Ratings.history(username, game),
          {:ok, chart} <- Asciichart.plot(ratings, height: 15) do
       IO.puts(chart)
     end
