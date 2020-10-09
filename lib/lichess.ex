@@ -1,5 +1,5 @@
-defmodule Lichess do
-  alias Lichess.{Client, Summary, Variants}
+defmodule Lichex do
+  alias Lichex.{Client, Summary, Variants}
 
   def chart_rating(username, variant) do
     with {:ok, variant} <- Variants.validate(variant),

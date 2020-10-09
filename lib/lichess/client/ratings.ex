@@ -1,6 +1,6 @@
-defmodule Lichess.Client.Ratings do
+defmodule Lichex.Client.Ratings do
   use Tesla
-  alias Lichess.Config
+  alias Lichex.Config
 
   plug(Tesla.Middleware.BaseUrl, "https://lichess.org/api")
   plug(Tesla.Middleware.Headers, [{"Authorization", "Bearer #{Config.token()}"}])

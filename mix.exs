@@ -1,9 +1,9 @@
-defmodule Lichess.MixProject do
+defmodule Lichex.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :lichess_progress,
+      app: :lichex,
       version: "0.1.0",
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,

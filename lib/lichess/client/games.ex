@@ -1,6 +1,6 @@
-defmodule Lichess.Client.Games do
+defmodule Lichex.Client.Games do
   use Tesla
-  alias Lichess.Config
+  alias Lichex.Config
 
   plug(Tesla.Middleware.BaseUrl, "https://lichess.org/api")
 

@@ -1,5 +1,5 @@
-* Lichess
-Small app with CLI tasks for tracking Lichess progress (or lack thereof).
+* Lichex
+Small app with CLI tasks for tracking Lichex progress (or lack thereof).
 
 ** Usage
 *** Chart

@@ -1,4 +1,4 @@
-defmodule Lichess.Summary do
+defmodule Lichex.Summary do
   defmodule Category do
     defstruct count: 0, wins: 0
 
@@ -15,7 +15,7 @@ defmodule Lichess.Summary do
     end
   end
 
-  alias Lichess.Summary.Category
+  alias Lichex.Summary.Category
 
   defstruct black: Category.new(),
             white: Category.new(),

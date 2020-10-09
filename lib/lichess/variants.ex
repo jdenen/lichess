@@ -1,4 +1,4 @@
-  defmodule Lichess.Variants do
+  defmodule Lichex.Variants do
     @map %{
       antichess: "Antichess",
       atomic: "Atomic",

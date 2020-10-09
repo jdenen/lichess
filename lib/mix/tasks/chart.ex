@@ -1,5 +1,5 @@
 defmodule Mix.Tasks.Chart do
-  Lichess.Variants.all()
+  Lichex.Variants.all()
   |> Enum.map(fn variant ->
     mod_name = Module.concat(__MODULE__, String.capitalize("#{variant}"))
 
@@ -12,7 +12,7 @@ defmodule Mix.Tasks.Chart do
             mix chart.#{unquote(variant)} bruce_wayne
         """
         use Mix.Task
-        alias Lichess.Config
+        alias Lichex.Config
 
         @shortdoc "Chart ratings for #{unquote(variant)}"
 
@@ -20,7 +20,7 @@ defmodule Mix.Tasks.Chart do
         def run(args) do
           args
           |> Enum.at(0, Config.user())
-          |> Lichess.chart_rating(unquote(variant))
+          |> Lichex.chart_rating(unquote(variant))
         end
       end
 

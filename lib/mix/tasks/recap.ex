@@ -6,7 +6,7 @@ defmodule Mix.Tasks.Recap do
       mix recap bruce_wayne
   """
   use Mix.Task
-  alias Lichess.Config
+  alias Lichex.Config
 
   @shortdoc "Summarize last 100 games"
 
@@ -14,6 +14,6 @@ defmodule Mix.Tasks.Recap do
   def run(args) do
     args
     |> Enum.at(0, Config.user())
-    |> Lichess.summarize()
+    |> Lichex.summarize()
   end
 end
