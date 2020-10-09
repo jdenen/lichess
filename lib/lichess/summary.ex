@@ -65,6 +65,7 @@ defmodule Lichess.Summary do
   end
 
   defp win?(%{"status" => "draw"}, _), do: false
+  defp win?(%{"status" => "stalemate"}, _), do: false
 
   defp win?(%{"winner" => winner, "players" => players}, username) do
     user_color(players, username) == winner
