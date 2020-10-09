@@ -1,6 +1,6 @@
 * Lichess
 
-Code and literate documentation for tracking Lichess progress.
+Code and literate documentation for tracking Lichess progress (or lack thereof).
 
 #+NAME: rapid
 #+CALL: run(variant="rapid", user="beardedjohnson")
@@ -68,3 +68,7 @@ Run in your terminal or execute this code block in Emacs:
 #+BEGIN_SRC sh :eval query :results silent
 mix do deps.get, compile
 #+END_SRC
+
+A =LICHESS_API_TOKEN= environment variable /must/ be set at compile time.
+
+I suggest using [[https://direnv.net/][direnv]] to set your =LICHESS_API_TOKEN= in this project only. The root =.envrc= file is ignored, so there's no risk of committing your token.
