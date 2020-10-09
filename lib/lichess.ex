@@ -31,6 +31,10 @@ defmodule Lichess do
     def validate(game) do
       {:error, "Unsupported game type: '#{game}'"}
     end
+
+    def games do
+      @keys
+    end
   end
 
   alias Lichess.{Client, Games}
