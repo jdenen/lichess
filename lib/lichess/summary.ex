@@ -75,6 +75,8 @@ defmodule Lichess.Summary do
     %{acc | casual: Category.inc(acc.casual, winner?)}
   end
 
+  defp win?(%{"status" => "draw"}, _), do: false
+
   defp win?(%{"winner" => winner, "players" => players}, username) do
     user_color(players, username) == winner
   end
@@ -83,6 +85,24 @@ defmodule Lichess.Summary do
     case get_in(players, ["black", "user", "id"]) do
       ^username -> "black"
       _ -> "white"
+    end
+  end
+
+  defimpl String.Chars do
+    def to_string(t) do
+      """
+      ===========================
+      = Recap of Last 100 Games =
+      ===========================
+      #{t.black.count} games as BLACK (#{t.black.wins} wins)
+      #{t.white.count} games as WHITE (#{t.white.wins} wins)
+
+      #{t.rated.count} RATED games (#{t.rated.wins} wins)
+      #{t.casual.count} CASUAL games (#{t.casual.wins} wins)
+
+      #{t.blitz.count} BLITZ games (#{t.blitz.wins} wins)
+      #{t.rapid.count} RAPID games (#{t.rapid.wins} wins)
+      """
     end
   end
 end
