@@ -80,18 +80,24 @@ defmodule Lichess.Summary do
   defimpl String.Chars do
     def to_string(t) do
       """
-      ===========================
-      = Recap of Last 100 Games =
-      ===========================
-      #{t.black.count} games as BLACK (#{t.black.wins} wins)
-      #{t.white.count} games as WHITE (#{t.white.wins} wins)
-
-      #{t.rated.count} RATED games (#{t.rated.wins} wins)
-      #{t.casual.count} CASUAL games (#{t.casual.wins} wins)
-
-      #{t.blitz.count} BLITZ games (#{t.blitz.wins} wins)
-      #{t.rapid.count} RAPID games (#{t.rapid.wins} wins)
+      +===========================+
+      |  Recap of Last 100 Games  |
+      +===========================+
+      #{pad_out(t.black, "BLACK")}
+      #{pad_out(t.white, "WHITE")}
+      +---------------------------+
+      #{pad_out(t.rated, "RATED")}
+      #{pad_out(t.casual, "CASUAL")}
+      +---------------------------+
+      #{pad_out(t.blitz, "BLITZ")}
+      #{pad_out(t.rapid, "RAPID")}
+      +===========================+
       """
+    end
+
+    defp pad_out(%{count: count, wins: wins}, label) do
+      output = String.pad_trailing("| #{count} #{label} games (#{wins} wins)", 28)
+      "#{output}|"
     end
   end
 end
