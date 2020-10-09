@@ -1,0 +1,71 @@
+* Lichess
+
+Code and literate documentation for tracking Lichess progress.
+
+** Ratings
+*** Rapid
+#+NAME: rapid
+#+CALL: run(game="rapid")
+
+#+begin_src sh
+1268.00 ┤
+1262.27 ┤      ╭╮
+1256.53 ┤      ││
+1250.80 ┤      ││
+1245.07 ┤╭╮    │╰
+1239.33 ┤││   ╭╯
+1233.60 ┤││   │
+1227.87 ┤││   │
+1222.13 ┤││   │
+1216.40 ┤│╰╮╭─╯
+1210.67 ┤│ ││
+1204.93 ┤│ ││
+1199.20 ┤│ ││
+1193.47 ┤│ ╰╯
+1187.73 ┤│
+1182.00 ┼╯
+
+#+end_src
+
+*** Puzzles
+#+NAME: puzzles
+#+CALL: run(game="puzzles")
+
+#+begin_src sh
+1785.00 ┤
+1770.13 ┤   ╭─╮
+1755.27 ┤  ╭╯ │  ╭
+1740.40 ┤ ╭╯  ╰╮ │
+1725.53 ┤ │    ╰╮│
+1710.67 ┤╭╯     ╰╯
+1695.80 ┤│
+1680.93 ┤│
+1666.07 ┤│
+1651.20 ┤│
+1636.33 ┤│
+1621.47 ┤│
+1606.60 ┤│
+1591.73 ┤│
+1576.87 ┤│
+1562.00 ┼╯
+
+#+end_src
+
+** Usage
+*** Emacs
+Use =C-c C-c= on each =#+CALL:= block in this file.
+
+*** Terminal
+Run this command in your terminal, where =$game= is a game like =rapid= or =kingofthehill=.
+
+#+NAME: run
+#+BEGIN_SRC sh :var game="rapid" :eval yes :results output code
+mix lichess.$game beardedjohnson
+#+END_SRC
+** Setup
+Run in your terminal or execute this code block in Emacs:
+
+#+NAME: setup
+#+BEGIN_SRC sh :eval query :results silent
+mix do deps.get, compile
+#+END_SRC
