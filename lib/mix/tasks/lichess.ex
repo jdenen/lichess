@@ -6,18 +6,21 @@ defmodule Mix.Tasks.Lichess do
     ast =
       quote do
         @moduledoc """
-        Chart ratings for #{unquote(variant)}. Username argument required.
+        Chart ratings for #{unquote(variant)}.
 
         Example:
             mix lichess.#{unquote(variant)} bruce_wayne
         """
         use Mix.Task
+        alias Lichess.Config
 
         @shortdoc "Chart ratings for #{unquote(variant)}"
 
         @impl true
-        def run([username | _]) do
-          Lichess.chart_rating(username, unquote(variant))
+        def run(args) do
+          args
+          |> Enum.at(0, Config.user())
+          |> Lichess.chart_rating(unquote(variant))
         end
       end
 
@@ -29,18 +32,21 @@ defmodule Mix.Tasks.Lichess do
 
   defmodule Recap do
     @moduledoc """
-    Summarize the last 100 games of all variants. Username argument required.
+    Summarize the last 100 games of all variants.
 
     Example:
         mix lichess.recap bruce_wayne
     """
     use Mix.Task
+    alias Lichess.Config
 
     @shortdoc "Summarize last 100 games"
 
     @impl true
-    def run([username | _]) do
-      Lichess.summarize(username)
+    def run(args) do
+      args
+      |> Enum.at(0, Config.user())
+      |> Lichess.summarize()
     end
   end
 end

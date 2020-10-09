@@ -1,12 +1,11 @@
 defmodule Lichess.Client.Games do
   use Tesla
-
-  @token System.fetch_env!("LICHESS_API_TOKEN")
+  alias Lichess.Config
 
   plug(Tesla.Middleware.BaseUrl, "https://lichess.org/api")
 
   plug(Tesla.Middleware.Headers, [
-    {"Authorization", "Bearer #{@token}"},
+    {"Authorization", "Bearer #{Config.token()}"},
     {"Accept", "application/x-ndjson"}
   ])
 
