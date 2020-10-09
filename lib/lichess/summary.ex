@@ -22,9 +22,7 @@ defmodule Lichess.Summary do
             rated: Category.new(),
             casual: Category.new(),
             blitz: Category.new(),
-            rapid: Category.new(),
-            correspondence: Category.new(),
-            classic: Category.new()
+            rapid: Category.new()
 
   def new(username, games) when is_list(games) do
     Enum.reduce(games, %__MODULE__{}, &reducer(&1, &2, username))
@@ -51,28 +49,19 @@ defmodule Lichess.Summary do
     end
   end
 
-  defp reduce_speed(acc, %{"speed" => "blitz"}, winner?) do
-    %{acc | blitz: Category.inc(acc.blitz, winner?)}
+  defp reduce_speed(acc, game, winner?) do
+    case Map.get(game, "speed") do
+      "blitz" -> %{acc | blitz: Category.inc(acc.blitz, winner?)}
+      "rapid" -> %{acc | rapid: Category.inc(acc.rapid, winner?)}
+      _ -> acc
+    end
   end
 
-  defp reduce_speed(acc, %{"speed" => "rapid"}, winner?) do
-    %{acc | rapid: Category.inc(acc.rapid, winner?)}
-  end
-
-  defp reduce_speed(acc, %{"speed" => "correspondence"}, winner?) do
-    %{acc | correspondence: Category.inc(acc.correspondence, winner?)}
-  end
-
-  defp reduce_speed(acc, %{"speed" => "classical"}, winner?) do
-    %{acc | classic: Category.inc(acc.classic, winner?)}
-  end
-
-  defp reduce_rated(acc, %{"rated" => true}, winner?) do
-    %{acc | rated: Category.inc(acc.rated, winner?)}
-  end
-
-  defp reduce_rated(acc, %{"rated" => false}, winner?) do
-    %{acc | casual: Category.inc(acc.casual, winner?)}
+  defp reduce_rated(acc, game, winner?) do
+    case Map.get(game, "rated") do
+      true -> %{acc | rated: Category.inc(acc.rated, winner?)}
+      false -> %{acc | casual: Category.inc(acc.casual, winner?)}
+    end
   end
 
   defp win?(%{"status" => "draw"}, _), do: false

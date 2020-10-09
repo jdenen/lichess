@@ -27,12 +27,12 @@ defmodule Mix.Tasks.Lichess do
     Module.create(name, ast, Macro.Env.location(__ENV__))
   end)
 
-  defmodule Summary do
+  defmodule Recap do
     @moduledoc """
     Summarize the last 100 games of all variants. Username argument required.
 
     Example:
-        mix lichess.summary bruce_wayne
+        mix lichess.recap bruce_wayne
     """
     use Mix.Task
 
