@@ -6,14 +6,14 @@ Small app with CLI tasks for tracking Lichess progress (or lack thereof).
 Run this command in your terminal, where =$variant= is a game type or speed (like =rapid= or =chess960=).
 
 #+BEGIN_SRC sh :var variant="blitz" :var user="beardedjohnson" :eval yes :results output code
-mix lichess.$variant $user
+mix chart.$variant $user
 #+END_SRC
 
 *** Recap
 Run this command in your terminal to see a recap of a =$user='s last 100 games.
 
 #+BEGIN_SRC sh :var user="beardedjohnson" :eval yes :results output raw :wrap src txt
-mix lichess.recap $user
+mix recap $user
 #+END_SRC
 
 ** Setup

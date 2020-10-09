@@ -1,4 +1,4 @@
-defmodule Mix.Tasks.Lichess do
+defmodule Mix.Tasks.Chart do
   Lichess.Variants.all()
   |> Enum.map(fn variant ->
     mod_name = Module.concat(__MODULE__, String.capitalize("#{variant}"))
@@ -9,7 +9,7 @@ defmodule Mix.Tasks.Lichess do
         Chart ratings for #{unquote(variant)}.
 
         Example:
-            mix lichess.#{unquote(variant)} bruce_wayne
+            mix chart.#{unquote(variant)} bruce_wayne
         """
         use Mix.Task
         alias Lichess.Config
@@ -29,24 +29,4 @@ defmodule Mix.Tasks.Lichess do
   |> Enum.each(fn {name, ast} ->
     Module.create(name, ast, Macro.Env.location(__ENV__))
   end)
-
-  defmodule Recap do
-    @moduledoc """
-    Summarize the last 100 games of all variants.
-
-    Example:
-        mix lichess.recap bruce_wayne
-    """
-    use Mix.Task
-    alias Lichess.Config
-
-    @shortdoc "Summarize last 100 games"
-
-    @impl true
-    def run(args) do
-      args
-      |> Enum.at(0, Config.user())
-      |> Lichess.summarize()
-    end
-  end
 end
