@@ -2,8 +2,52 @@
 
 Code and literate documentation for tracking Lichess progress (or lack thereof).
 
+#+NAME: summary
+#+CALL: recap(user="beardedjohnson")
+
+#+RESULTS: summary
+#+begin_src txt
++===========================+
+|  Recap of Last 100 Games  |
++===========================+
+| 50 BLACK games (33 wins)  |
+| 50 WHITE games (28 wins)  |
++---------------------------+
+| 23 RATED games (12 wins)  |
+| 77 CASUAL games (49 wins) |
++---------------------------+
+| 16 BLITZ games (9 wins)   |
+| 75 RAPID games (48 wins)  |
++===========================+
+
+#+end_src
+
+#+NAME: blitz
+#+CALL: chart(variant="blitz", user="beardedjohnson")
+
+#+RESULTS: blitz
+#+begin_src sh
+1040.00 ┤
+1035.13 ┼╮
+1030.27 ┤│
+1025.40 ┤│
+1020.53 ┤│
+1015.67 ┤│
+1010.80 ┤│
+1005.93 ┤│
+1001.07 ┤│
+ 996.20 ┤│
+ 991.33 ┤│
+ 986.47 ┤│
+ 981.60 ┤│
+ 976.73 ┤│
+ 971.87 ┤│
+ 967.00 ┤╰
+
+#+end_src
+
 #+NAME: rapid
-#+CALL: run(variant="rapid", user="beardedjohnson")
+#+CALL: chart(variant="rapid", user="beardedjohnson")
 
 #+RESULTS: rapid
 #+begin_src sh
@@ -27,7 +71,7 @@ Code and literate documentation for tracking Lichess progress (or lack thereof).
 #+end_src
 
 #+NAME: puzzles
-#+CALL: run(variant="puzzles", user="beardedjohnson")
+#+CALL: chart(variant="puzzles", user="beardedjohnson")
 
 #+RESULTS: puzzles
 #+begin_src sh
@@ -51,16 +95,21 @@ Code and literate documentation for tracking Lichess progress (or lack thereof).
 #+end_src
 
 ** Usage
-*** Emacs
-Use =C-c C-c= on each =#+CALL:= block in this file.
+*** Chart
+Run this command in your terminal, where =$variant= is a game type or speed (like =rapid= or =chess960=). In Emacs, use =C-c C-c= on a variant's =#+CALL:= block in this file.
 
-*** Terminal
-Run this command in your terminal, where =$variant= is a game type like =rapid= or =kingofthehill=. Use your Lichess username in place of =$user=.
-
-#+NAME: run
+#+NAME: chart
 #+BEGIN_SRC sh :var variant="rapid" :var user="beardedjohnson" :eval yes :results output code
 mix lichess.$variant $user
 #+END_SRC
+*** Recap
+Run this command in your terminal to see a recap of a =$user='s last 100 games. In Emacs, use =C-c C-c= on the =#+CALL: recap= block.
+
+#+NAME: recap
+#+BEGIN_SRC sh :var user="beardedjohnson" :eval yes :results output raw :wrap src txt
+mix lichess.recap $user
+#+END_SRC
+
 ** Setup
 Run in your terminal or execute this code block in Emacs:
 
