@@ -1,5 +1,5 @@
 defmodule Mix.Tasks.Lichess do
-  Lichess.Games.games()
+  Lichess.Variants.all()
   |> Enum.map(fn game ->
     mod_name = Module.concat(__MODULE__, String.capitalize("#{game}"))
 
