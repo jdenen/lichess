@@ -5,7 +5,7 @@ Code and literate documentation for tracking Lichess progress.
 ** Ratings
 *** Rapid
 #+NAME: rapid
-#+CALL: run(game="rapid")
+#+CALL: run(game="rapid", user="beardedjohnson")
 
 #+begin_src sh
 1268.00 ┤
@@ -29,7 +29,7 @@ Code and literate documentation for tracking Lichess progress.
 
 *** Puzzles
 #+NAME: puzzles
-#+CALL: run(game="puzzles")
+#+CALL: run(game="puzzles", user="beardedjohnson")
 
 #+begin_src sh
 1785.00 ┤
@@ -56,11 +56,11 @@ Code and literate documentation for tracking Lichess progress.
 Use =C-c C-c= on each =#+CALL:= block in this file.
 
 *** Terminal
-Run this command in your terminal, where =$game= is a game like =rapid= or =kingofthehill=.
+Run this command in your terminal, where =$game= is a game like =rapid= or =kingofthehill= and =$user= is your Lichess username.
 
 #+NAME: run
-#+BEGIN_SRC sh :var game="rapid" :eval yes :results output code
-mix lichess.$game beardedjohnson
+#+BEGIN_SRC sh :var game="rapid" :var user="beardedjohnson" :eval yes :results output code
+mix lichess.$game $user
 #+END_SRC
 ** Setup
 Run in your terminal or execute this code block in Emacs:
