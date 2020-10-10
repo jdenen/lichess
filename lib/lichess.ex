@@ -9,8 +9,8 @@ defmodule Lichex do
     end
   end
 
-  def summarize(username) do
-    with {:ok, games} <- Client.Games.previous(username, 100) do
+  def summarize(username, count) do
+    with {:ok, games} <- Client.Games.previous(username, count) do
       username
       |> Summary.new(games)
       |> IO.puts()

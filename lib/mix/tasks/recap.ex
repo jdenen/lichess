@@ -4,16 +4,21 @@ defmodule Mix.Tasks.Recap do
 
   Example:
       mix recap bruce_wayne
+
+      mix recap --count 42 bruce_wayne
   """
   use Mix.Task
   alias Lichex.Config
 
-  @shortdoc "Summarize last 100 games"
+  @shortdoc "Summarize recent games"
 
   @impl true
   def run(args) do
-    args
-    |> Enum.at(0, Config.user())
-    |> Lichex.summarize()
+    {flags, args, _} = OptionParser.parse(args, strict: [count: :integer])
+
+    count = Keyword.get(flags, :count, 100)
+    username = Enum.at(args, 0, Config.user())
+
+    Lichex.summarize(username, count)
   end
 end
