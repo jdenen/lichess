@@ -10,6 +10,8 @@ Summarize a user's last 100 games with:
  
      mix recap $user
      
+     mix recap $user --count 42
+     
 ## Setup
 Grab dependencies and compile:
 
