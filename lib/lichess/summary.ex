@@ -17,7 +17,10 @@ defmodule Lichex.Summary do
 
   alias Lichex.Summary.Category
 
-  defstruct black: Category.new(),
+  defstruct win: 0,
+            loss: 0,
+            draw: 0,
+            black: Category.new(),
             white: Category.new(),
             rated: Category.new(),
             casual: Category.new(),
@@ -32,9 +35,18 @@ defmodule Lichex.Summary do
     winner? = win?(game, username)
 
     acc
+    |> reduce_result(game, username)
     |> reduce_color(game, username, winner?)
     |> reduce_speed(game, winner?)
     |> reduce_rated(game, winner?)
+  end
+
+  defp reduce_result(acc, game, username) do
+    case result(game, username) do
+      :win -> %{acc | win: acc.win + 1}
+      :loss -> %{acc | loss: acc.loss + 1}
+      :draw -> %{acc | draw: acc.draw + 1}
+    end
   end
 
   defp reduce_color(
@@ -64,6 +76,15 @@ defmodule Lichex.Summary do
     end
   end
 
+  defp result(%{"status" => status}, _) when status in ["draw", "stalemate"], do: :draw
+
+  defp result(game, username) do
+    case win?(game, username) do
+      true -> :win
+      false -> :loss
+    end
+  end
+
   defp win?(%{"status" => "draw"}, _), do: false
   defp win?(%{"status" => "stalemate"}, _), do: false
 
@@ -82,8 +103,12 @@ defmodule Lichex.Summary do
     def to_string(t) do
       """
       +===========================+
-      |  Recap of Last 100 Games  |
+      |          Recap            |
       +===========================+
+      #{pad_out(t.win, "WON")}
+      #{pad_out(t.loss, "LOST")}
+      #{pad_out(t.draw, "DRAWN")}
+      +---------------------------+
       #{pad_out(t.black, "BLACK")}
       #{pad_out(t.white, "WHITE")}
       +---------------------------+
@@ -94,6 +119,11 @@ defmodule Lichex.Summary do
       #{pad_out(t.rapid, "RAPID")}
       +===========================+
       """
+    end
+
+    defp pad_out(count, label) when is_integer(count) do
+      output = String.pad_trailing("| #{count} games #{label}", 28)
+      "#{output}|"
     end
 
     defp pad_out(%{count: count, wins: wins}, label) do
